@@ -1,116 +1,359 @@
 <?php include 'db_connect.php' ?>
 <style>
-   span.float-right.summary_icon {
-    font-size: 3rem;
+  /* Modern Dashboard Styling */
+  :root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --success: #4cc9f0;
+    --info: #4895ef;
+    --warning: #f72585;
+    --danger: #e63946;
+    --light: #f8f9fa;
+    --dark: #212529;
+  }
+  
+  body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .main-container {
+    padding: 2rem;
+    background-color: #f0f2f5;
+  }
+  
+  /* Welcome Banner */
+  .welcome-banner {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    border-radius: 15px;
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+  }
+  
+  .welcome-banner::before {
+    content: "";
     position: absolute;
-    right: 1rem;
-    color: #ffffff96;
-}
-.imgs{
-		margin: .5em;
-		max-width: calc(100%);
-		max-height: calc(100%);
-	}
-	.imgs img{
-		max-width: calc(100%);
-		max-height: calc(100%);
-		cursor: pointer;
-	}
-	#imagesCarousel,#imagesCarousel .carousel-inner,#imagesCarousel .carousel-item{
-		height: 60vh !important;background: black;
-	}
-	#imagesCarousel .carousel-item.active{
-		display: flex !important;
-	}
-	#imagesCarousel .carousel-item-next{
-		display: flex !important;
-	}
-	#imagesCarousel .carousel-item img{
-		margin: auto;
-	}
-	#imagesCarousel img{
-		width: auto!important;
-		height: auto!important;
-		max-height: calc(100%)!important;
-		max-width: calc(100%)!important;
-	}
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+  }
+  
+  .welcome-banner h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .welcome-banner p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .welcome-icon {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.2;
+  }
+  
+  /* Stats Cards */
+  .stats-container {
+    margin-bottom: 2.5rem;
+  }
+  
+  .stat-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%; /* Ensure card takes full width of the column */
+    position: relative;
+    border: none;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .stat-card-header {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+  }
+  
+  .stat-card-users {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  }
+  
+  .stat-card-topics {
+    background: linear-gradient(135deg, #4895ef, #4cc9f0);
+  }
+  
+  .stat-card-tags {
+    background: linear-gradient(135deg, #f72585, #b5179e);
+  }
+  
+  .stat-card-icon {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    font-size: 4rem;
+    opacity: 0.2;
+    color: white;
+  }
+  
+  .stat-card-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  
+  /* Tags Section */
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .section-header::after {
+    content: "";
+    flex-grow: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary), transparent);
+    margin-left: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .section-icon {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+  }
+  
+  /* Tag Cards */
+  .tag-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%; /* Ensure card takes full width of the column */
+    border: none;
+    position: relative;
+  }
+  
+  .tag-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tag-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, #4361ee, #3a0ca3);
+  }
+  
+  .tag-card-body {
+    padding: 1.5rem;
+  }
+  
+  .tag-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .tag-icon {
+    color: var(--primary);
+    margin-right: 0.75rem;
+    background: rgba(67, 97, 238, 0.1);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tag-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* Keep original carousel styles */
+  .imgs{
+    margin: .5em;
+    max-width: calc(100%);
+    max-height: calc(100%);
+  }
+  .imgs img{
+    max-width: calc(100%);
+    max-height: calc(100%);
+    cursor: pointer;
+  }
+  #imagesCarousel,#imagesCarousel .carousel-inner,#imagesCarousel .carousel-item{
+    height: 60vh !important;background: black;
+  }
+  #imagesCarousel .carousel-item.active{
+    display: flex !important;
+  }
+  #imagesCarousel .carousel-item-next{
+    display: flex !important;
+  }
+  #imagesCarousel .carousel-item img{
+    margin: auto;
+  }
+  #imagesCarousel img{
+    width: auto!important;
+    height: auto!important;
+    max-height: calc(100%)!important;
+    max-width: calc(100%)!important;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 1rem;
+    }
+    
+    .welcome-banner {
+      padding: 1.5rem;
+    }
+    
+    .welcome-icon {
+      font-size: 3rem;
+    }
+    
+    .stat-card-value {
+      font-size: 2rem;
+    }
+  }
 </style>
 
-<div class="containe-fluid">
-	<div class="row mt-3 ml-3 mr-3">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <?php echo "Welcome back ". $_SESSION['login_name']."!"  ?>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body bg-primary">
-                                    <div class="card-body text-white">
-                                        <span class="float-right summary_icon"><i class="fa fa-users"></i></span>
-                                        <h4><b>
-                                            <?php echo $conn->query("SELECT * FROM users")->num_rows; ?>
-                                        </b></h4>
-                                        <p><b>Users</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body bg-info">
-                                    <div class="card-body text-white">
-                                        <span class="float-right summary_icon"><i class="fa fa-comments"></i></span>
-                                        <h4><b>
-                                            <?php echo $conn->query("SELECT * FROM topics")->num_rows; ?>
-                                        </b></h4>
-                                        <p><b>Forum Topics</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body bg-warning">
-                                    <div class="card-body text-white">
-                                        <span class="float-right summary_icon"><i class="fa fa-tags"></i></span>
-                                        <h4><b>
-                                            <?php echo $conn->query("SELECT * FROM categories")->num_rows; ?>
-                                        </b></h4>
-                                        <p><b>Tags</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>	
-
-                    <hr class="divider" style="max-width: 100%">
-                    <h4><i class="fa fa-tags text-primary"></i> Tags</h4>
-                    <div class="row">
-                    <?php
-                     $tags = $conn->query("SELECT * FROM categories order by name asc");
-                     while($row=$tags->fetch_assoc()):
-                    ?>
-                        <div class="col-md-3">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <p>
-                                    <large><i class="fa fa-tag text-primary"></i> <b><?php echo $row['name'] ?></b></large>
-                                </p>
-                                <hr class="divider" style="max-width: 100%">
-                                <p><small><i><?php echo $row['description'] ?></i></small></p>
-                            </div>
-                        </div>
-                        </div>
-                    <?php endwhile; ?>
-                    </div>
-                </div>
-            </div>      			
+<div class="main-container">
+  <div class="welcome-banner">
+    <h2><i class="fa fa-user-circle mr-2"></i> Hello, <?php echo $_SESSION['login_name']; ?>!</h2>
+    <p>Welcome back to your dashboard. Here's an overview of your forum.</p>
+    <i class="fa fa-tachometer-alt welcome-icon"></i>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row stats-container">
+      <div class="col-lg-4 col-md-6 mb-4 d-flex">
+        <div class="stat-card">
+          <div class="stat-card-header stat-card-users">
+            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM users")->num_rows; ?></div>
+            <div class="stat-card-label">Total Users</div>
+            <i class="fa fa-users stat-card-icon"></i>
+          </div>
         </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 mb-4 d-flex">
+        <div class="stat-card">
+          <div class="stat-card-header stat-card-topics">
+            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM topics")->num_rows; ?></div>
+            <div class="stat-card-label">Forum Topics</div>
+            <i class="fa fa-comments stat-card-icon"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 mb-4 d-flex">
+        <div class="stat-card">
+          <div class="stat-card-header stat-card-tags">
+            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM categories")->num_rows; ?></div>
+            <div class="stat-card-label">Available Tags</div>
+            <i class="fa fa-tags stat-card-icon"></i>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="section-header">
+      <div class="section-icon">
+        <i class="fa fa-tags"></i>
+      </div>
+      <h3 class="section-title">Forum Tags</h3>
+    </div>
+    
+    <div class="row">
+      <?php
+       // PERUBAHAN: Mengambil semua kategori, diurutkan dari yang terbaru
+       $tags = $conn->query("SELECT * FROM categories ORDER BY id DESC");
+       // PERUBAHAN: Menggunakan while lagi untuk menampilkan semua data
+       while($row = $tags->fetch_assoc()):
+      ?>
+      <div class="col-12 mb-4">
+        <div class="tag-card">
+          <div class="tag-card-body">
+            <div class="tag-name">
+              <div class="tag-icon">
+                <i class="fa fa-tag"></i>
+              </div>
+              <?php echo $row['name'] ?>
+            </div>
+            <div class="tag-description">
+              <?php echo $row['description'] ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php endwhile; ?>
+    </div>
+  </div>
 </div>
+
 <script>
 	$('#manage-records').submit(function(e){
         e.preventDefault()
