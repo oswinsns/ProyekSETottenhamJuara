@@ -25,7 +25,6 @@
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  /* Center the main container content */
   .main-container {
     padding: 2rem;
     background-color: #f0f2f5;
@@ -33,10 +32,10 @@
     transition: margin-left 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center all content */
+    align-items: center;
   }
   
-  /* Center the page header */
+  /* Page Header */
   .page-header {
     background: var(--gradient-primary);
     border-radius: var(--border-radius-lg);
@@ -47,7 +46,7 @@
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 1000px; /* Match topics container width */
+    max-width: 1000px;
   }
   
   .page-header::before {
@@ -114,14 +113,14 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   }
   
-  /* Center the topics container */
+  /* Modern Card Container */
   .topics-container {
     background: white;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
     overflow: hidden;
-    max-width: 1000px; /* Set maximum width */
-    margin: 0 auto; /* Center the container */
+    max-width: 1000px;
+    margin: 0 auto;
   }
   
   .topics-header {
@@ -152,12 +151,12 @@
     box-shadow: var(--shadow-sm);
   }
   
-  /* Center the topics list */
+  /* Topic List */
   .topics-list {
     padding: 1.5rem 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align the topic items */
+    align-items: center;
   }
   
   .topic-item {
@@ -168,8 +167,8 @@
     transition: all 0.3s ease;
     overflow: hidden;
     position: relative;
-    width: 100%; /* Full width within the centered container */
-    max-width: 900px; /* Maximum width for topic cards */
+    width: 100%;
+    max-width: 900px;
   }
   
   .topic-item:hover {
@@ -317,6 +316,13 @@
   .stat-comments {
     background: rgba(67, 97, 238, 0.1);
     color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .stat-comments:hover {
+    background: rgba(67, 97, 238, 0.2);
+    transform: translateY(-1px);
   }
   
   .topic-tags {
@@ -350,14 +356,299 @@
     text-decoration: none;
   }
   
-  /* Center empty state */
+  /* Modern Comment Section */
+  .comment-section {
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+    display: none;
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .comment-section.active {
+    display: block;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      max-height: 1000px;
+    }
+  }
+  
+  .comment-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .comment-header-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gradient-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  .comment-header h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+  }
+  
+  .comment-count {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  /* Comment List */
+  .comment-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem 1.5rem;
+  }
+  
+  .comment-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .comment-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  
+  .comment-list::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
+  
+  .comment-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+  }
+  
+  .comment-item:hover {
+    border-left-color: var(--primary);
+    transform: translateX(5px);
+  }
+  
+  .comment-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .comment-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .comment-avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--gradient-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .comment-author-info {
+    flex: 1;
+  }
+  
+  .comment-author-info h6 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+  }
+  
+  .comment-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin: 0;
+  }
+  
+  .comment-content {
+    color: #495057;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Comment Actions */
+  .comment-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .comment-item:hover .comment-actions {
+    opacity: 1;
+  }
+  
+  .comment-action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 4px;
+  }
+  
+  .comment-action-btn:hover {
+    background: #f8f9fa;
+    color: var(--primary);
+  }
+  
+  .comment-action-btn.delete:hover {
+    color: var(--danger);
+  }
+  
+  /* Comment Form */
+  .comment-form {
+    padding: 1rem 1.5rem;
+    background: white;
+    border-top: 1px solid #e9ecef;
+  }
+  
+  .comment-input-group {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .comment-user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .comment-input-container {
+    flex: 1;
+  }
+  
+  .comment-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+  }
+  
+  .comment-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+  }
+  
+  .comment-textarea::placeholder {
+    color: #6c757d;
+  }
+  
+  .comment-form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+  }
+  
+  .comment-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+  
+  .comment-submit-btn {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1.5rem;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .comment-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .comment-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Empty State */
+  .empty-comments {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+  }
+  
+  .empty-comments i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+  }
+  
+  .empty-comments p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Empty State */
   .empty-state {
     text-align: center;
     padding: 4rem 2rem;
     color: #6c757d;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
   }
   
   .empty-state i {
@@ -380,7 +671,6 @@
   /* Responsive Design */
   @media (max-width: 1024px) {
     .main-container {
-    
       padding: 1.5rem;
     }
     
@@ -404,6 +694,21 @@
     
     .topic-item {
       max-width: 100%;
+    }
+    
+    .comment-input-group {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .comment-user-avatar {
+      align-self: flex-start;
+    }
+    
+    .comment-form-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
     }
   }
   
@@ -440,6 +745,14 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
+    }
+    
+    .comment-list {
+      padding: 0.75rem;
+    }
+    
+    .comment-form {
+      padding: 0.75rem;
     }
   }
 </style>
@@ -545,7 +858,7 @@
               <i class="fa fa-eye"></i>
               <span><?php echo number_format($view) ?> views</span>
             </div>
-            <div class="stat-item stat-comments">
+            <div class="stat-item stat-comments" onclick="toggleComments(<?php echo $row['id'] ?>)">
               <i class="fa fa-comments"></i>
               <span><?php echo number_format($comments) ?> comments<?php echo $replies > 0 ? ' • '.number_format($replies).' replies':'' ?></span>
             </div>
@@ -562,6 +875,90 @@
               endif;
             endforeach; 
             ?>
+          </div>
+        </div>
+        
+        <!-- Comment Section -->
+        <div class="comment-section" id="comments-<?php echo $row['id'] ?>">
+          <div class="comment-header">
+            <div class="comment-header-icon">
+              <i class="fa fa-comments"></i>
+            </div>
+            <h6>Discussion</h6>
+            <span class="comment-count" id="comment-count-<?php echo $row['id'] ?>"><?php echo $comments ?> comments</span>
+          </div>
+          
+          <!-- Comment List -->
+          <div class="comment-list" id="comment-list-<?php echo $row['id'] ?>">
+            <?php
+            $topic_comments = $conn->query("SELECT c.*, u.name as user_name FROM comments c INNER JOIN users u ON c.user_id = u.id WHERE c.topic_id = ".$row['id']." ORDER BY c.date_created ASC");
+            if($topic_comments->num_rows > 0):
+              while($comment = $topic_comments->fetch_assoc()):
+                $comment_initials = strtoupper(substr($comment['user_name'], 0, 1) . substr(strstr($comment['user_name'], ' '), 1, 1));
+            ?>
+            <div class="comment-item" data-comment-id="<?php echo $comment['id'] ?>">
+              <div class="comment-author">
+                <div class="comment-avatar">
+                  <?php echo $comment_initials ?: substr($comment['user_name'], 0, 2) ?>
+                </div>
+                <div class="comment-author-info">
+                  <h6><?php echo $comment['user_name'] ?></h6>
+                  <p class="comment-date"><?php echo date('M d, Y \a\t g:i A', strtotime($comment['date_created'])) ?></p>
+                </div>
+              </div>
+              
+              <!-- Comment Actions (only for comment owner or admin) -->
+              <?php if($_SESSION['login_id'] == $comment['user_id'] || $_SESSION['login_type'] == 1): ?>
+              <div class="comment-actions">
+                <button class="comment-action-btn edit-comment" data-id="<?php echo $comment['id'] ?>" title="Edit Comment">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="comment-action-btn delete delete-comment" data-id="<?php echo $comment['id'] ?>" title="Delete Comment">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+              <?php endif; ?>
+              
+              <div class="comment-content" id="comment-content-<?php echo $comment['id'] ?>">
+                <?php echo nl2br(htmlspecialchars($comment['comment'])) ?>
+              </div>
+            </div>
+            <?php 
+              endwhile;
+            else:
+            ?>
+            <div class="empty-comments">
+              <i class="fa fa-comment-o"></i>
+              <p>No comments yet. Be the first to share your thoughts!</p>
+            </div>
+            <?php endif; ?>
+          </div>
+          
+          <!-- Comment Form -->
+          <div class="comment-form">
+            <form class="comment-form-submit" data-topic-id="<?php echo $row['id'] ?>">
+              <div class="comment-input-group">
+                <div class="comment-user-avatar">
+                  <?php 
+                  $user_initials = strtoupper(substr($_SESSION['login_name'], 0, 1) . substr(strstr($_SESSION['login_name'], ' '), 1, 1));
+                  echo $user_initials ?: substr($_SESSION['login_name'], 0, 2);
+                  ?>
+                </div>
+                <div class="comment-input-container">
+                  <textarea class="comment-textarea" name="comment" placeholder="Share your thoughts on this topic..." required></textarea>
+                  <div class="comment-form-actions">
+                    <span class="comment-info">
+                      <i class="fa fa-info-circle mr-1"></i>
+                      Be respectful and constructive
+                    </span>
+                    <button type="submit" class="comment-submit-btn">
+                      <i class="fa fa-paper-plane"></i>
+                      Post Comment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -604,6 +1001,70 @@ $(document).ready(function(){
     _conf("Are you sure you want to delete this topic?","delete_topic",[$(this).attr('data-id')],'mid-large')
   });
   
+  // Edit comment - using existing manage_comment.php
+  $(document).on('click', '.edit-comment', function(){
+    const commentId = $(this).data('id');
+    uni_modal("Edit Comment", "manage_comment.php?id=" + commentId, 'mid-large');
+  });
+  
+  // Delete comment
+  $(document).on('click', '.delete-comment', function(){
+    const commentId = $(this).data('id');
+    _conf("Are you sure you want to delete this comment?", "delete_comment", [commentId]);
+  });
+  
+  // Comment form submission - using existing save_comment action
+  $('.comment-form-submit').submit(function(e){
+    e.preventDefault();
+    
+    const $form = $(this);
+    const $button = $form.find('.comment-submit-btn');
+    const $textarea = $form.find('.comment-textarea');
+    const topicId = $form.data('topic-id');
+    const comment = $textarea.val().trim();
+    
+    if(!comment) {
+      alert('Please enter a comment');
+      return;
+    }
+    
+    // Disable button and show loading
+    $button.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Posting...');
+    
+    $.ajax({
+      url: 'ajax.php?action=save_comment',
+      method: 'POST',
+      data: {
+        topic_id: topicId,
+        comment: comment
+      },
+      success: function(resp) {
+        if(resp == 1) {
+          // Clear textarea
+          $textarea.val('');
+          
+          // Show success message
+          alert_toast('Comment posted successfully!', 'success');
+          
+          // Reload comments section
+          loadComments(topicId);
+          
+          // Update comment count
+          updateCommentCount(topicId);
+        } else {
+          alert_toast('Failed to post comment', 'error');
+        }
+      },
+      error: function() {
+        alert_toast('Error posting comment', 'error');
+      },
+      complete: function() {
+        // Re-enable button
+        $button.prop('disabled', false).html('<i class="fa fa-paper-plane"></i> Post Comment');
+      }
+    });
+  });
+  
   // Pagination (if JPaging is available)
   if(typeof $.fn.JPaging !== 'undefined') {
     $('.topics-list').JPaging({
@@ -612,6 +1073,88 @@ $(document).ready(function(){
     });
   }
 });
+
+// Toggle comments section
+function toggleComments(topicId) {
+  const $commentSection = $('#comments-' + topicId);
+  
+  if($commentSection.hasClass('active')) {
+    $commentSection.removeClass('active').slideUp(300);
+  } else {
+    // Close other open comment sections
+    $('.comment-section.active').removeClass('active').slideUp(300);
+    
+    // Open this comment section
+    $commentSection.addClass('active').slideDown(300);
+    
+    // Load fresh comments
+    loadComments(topicId);
+  }
+}
+
+// Load comments for a topic
+function loadComments(topicId) {
+  $.ajax({
+    url: 'ajax.php?action=get_comments',
+    method: 'POST',
+    data: { topic_id: topicId },
+    success: function(resp) {
+      if(resp) {
+        $('#comment-list-' + topicId).html(resp);
+      }
+    }
+  });
+}
+
+// Update comment count
+function updateCommentCount(topicId) {
+  $.ajax({
+    url: 'ajax.php?action=get_comment_count',
+    method: 'POST',
+    data: { topic_id: topicId },
+    success: function(resp) {
+      const count = parseInt(resp) || 0;
+      
+      // Update comment count in stats
+      const $statComments = $('[onclick="toggleComments(' + topicId + ')"] span');
+      $statComments.text(count + ' comments');
+      
+      // Update comment count in header
+      $('#comment-count-' + topicId).text(count + ' comments');
+    }
+  });
+}
+
+// Delete comment function
+function delete_comment(commentId) {
+  start_load();
+  $.ajax({
+    url: 'ajax.php?action=delete_comment',
+    method: 'POST',
+    data: { id: commentId },
+    success: function(resp) {
+      if(resp == 1) {
+        alert_toast("Comment successfully deleted", 'success');
+        
+        // Find the comment item and get topic ID
+        const $commentItem = $('[data-comment-id="' + commentId + '"]');
+        const $commentSection = $commentItem.closest('.comment-section');
+        const topicId = $commentSection.attr('id').replace('comments-', '');
+        
+        // Reload comments and update count
+        loadComments(topicId);
+        updateCommentCount(topicId);
+      } else {
+        alert_toast("Failed to delete comment", 'error');
+      }
+      end_load();
+    },
+    error: function() {
+      alert_toast("Error deleting comment", 'error');
+      end_load();
+    }
+  });
+}
 
 function delete_topic($id){
   start_load()
