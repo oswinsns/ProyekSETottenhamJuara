@@ -80,7 +80,7 @@
     overflow: hidden;
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    width: 100%; /* Ensure card takes full width of the column */
+    height: 100%;
     position: relative;
     border: none;
   }
@@ -179,7 +179,7 @@
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    width: 100%; /* Ensure card takes full width of the column */
+    height: 100%;
     border: none;
     position: relative;
   }
@@ -230,37 +230,25 @@
     line-height: 1.5;
   }
   
-  /* Keep original carousel styles */
-  .imgs{
-    margin: .5em;
-    max-width: calc(100%);
-    max-height: calc(100%);
+  /* PERUBAHAN: Blok CSS Responsif yang lebih lengkap */
+  @media (max-width: 991px) { /* Target tablet dan di bawahnya */
+    .stat-card-header {
+       padding: 1.25rem;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       text-align: center;
+    }
+    .stat-card-icon {
+       position: static;
+       margin-top: 0.5rem;
+       font-size: 2.5rem;
+       opacity: 0.3;
+       transform: none;
+       align-self: center;
+    }
   }
-  .imgs img{
-    max-width: calc(100%);
-    max-height: calc(100%);
-    cursor: pointer;
-  }
-  #imagesCarousel,#imagesCarousel .carousel-inner,#imagesCarousel .carousel-item{
-    height: 60vh !important;background: black;
-  }
-  #imagesCarousel .carousel-item.active{
-    display: flex !important;
-  }
-  #imagesCarousel .carousel-item-next{
-    display: flex !important;
-  }
-  #imagesCarousel .carousel-item img{
-    margin: auto;
-  }
-  #imagesCarousel img{
-    width: auto!important;
-    height: auto!important;
-    max-height: calc(100%)!important;
-    max-width: calc(100%)!important;
-  }
-  
-  /* Responsive adjustments */
+
   @media (max-width: 768px) {
     .main-container {
       padding: 1rem;
@@ -268,14 +256,35 @@
     
     .welcome-banner {
       padding: 1.5rem;
+      text-align: center;
+    }
+
+    .welcome-banner h2 {
+      font-size: 1.5rem;
+    }
+
+    .welcome-banner p {
+      font-size: 0.9rem;
     }
     
     .welcome-icon {
-      font-size: 3rem;
+      display: none; 
     }
     
+    .section-title {
+        font-size: 1.3rem;
+    }
+
     .stat-card-value {
       font-size: 2rem;
+    }
+
+    .stat-card-label{
+        font-size: 0.85rem;
+    }
+
+    .tag-card-body {
+        padding: 1.25rem;
     }
   }
 </style>
@@ -287,70 +296,66 @@
     <i class="fa fa-tachometer-alt welcome-icon"></i>
   </div>
   
-  <div class="container-fluid">
-    <div class="row stats-container">
-      <div class="col-lg-4 col-md-6 mb-4 d-flex">
-        <div class="stat-card">
-          <div class="stat-card-header stat-card-users">
-            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM users")->num_rows; ?></div>
-            <div class="stat-card-label">Total Users</div>
-            <i class="fa fa-users stat-card-icon"></i>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-4 col-md-6 mb-4 d-flex">
-        <div class="stat-card">
-          <div class="stat-card-header stat-card-topics">
-            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM topics")->num_rows; ?></div>
-            <div class="stat-card-label">Forum Topics</div>
-            <i class="fa fa-comments stat-card-icon"></i>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-4 col-md-6 mb-4 d-flex">
-        <div class="stat-card">
-          <div class="stat-card-header stat-card-tags">
-            <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM categories")->num_rows; ?></div>
-            <div class="stat-card-label">Available Tags</div>
-            <i class="fa fa-tags stat-card-icon"></i>
-          </div>
+  <div class="row stats-container">
+    <div class="col-lg-4 mb-4">
+      <div class="stat-card">
+        <div class="stat-card-header stat-card-users">
+          <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM users")->num_rows; ?></div>
+          <div class="stat-card-label">Total Users</div>
+          <i class="fa fa-users stat-card-icon"></i>
         </div>
       </div>
     </div>
     
-    <div class="section-header">
-      <div class="section-icon">
-        <i class="fa fa-tags"></i>
+    <div class="col-lg-4 mb-4">
+      <div class="stat-card">
+        <div class="stat-card-header stat-card-topics">
+          <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM topics")->num_rows; ?></div>
+          <div class="stat-card-label">Forum Topics</div>
+          <i class="fa fa-comments stat-card-icon"></i>
+        </div>
       </div>
-      <h3 class="section-title">Forum Tags</h3>
     </div>
     
-    <div class="row">
-      <?php
-       // PERUBAHAN: Mengambil semua kategori, diurutkan dari yang terbaru
-       $tags = $conn->query("SELECT * FROM categories ORDER BY id DESC");
-       // PERUBAHAN: Menggunakan while lagi untuk menampilkan semua data
-       while($row = $tags->fetch_assoc()):
-      ?>
-      <div class="col-12 mb-4">
-        <div class="tag-card">
-          <div class="tag-card-body">
-            <div class="tag-name">
-              <div class="tag-icon">
-                <i class="fa fa-tag"></i>
-              </div>
-              <?php echo $row['name'] ?>
+    <div class="col-lg-4 mb-4">
+      <div class="stat-card">
+        <div class="stat-card-header stat-card-tags">
+          <div class="stat-card-value"><?php echo $conn->query("SELECT * FROM categories")->num_rows; ?></div>
+          <div class="stat-card-label">Available Tags</div>
+          <i class="fa fa-tags stat-card-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section-header">
+    <div class="section-icon">
+      <i class="fa fa-tags"></i>
+    </div>
+    <h3 class="section-title">Forum Tags</h3>
+  </div>
+  
+  <div class="row">
+    <?php
+     $tags = $conn->query("SELECT * FROM categories order by id DESC");
+     while($row=$tags->fetch_assoc()):
+    ?>
+    <div class="col-12 mb-4">
+      <div class="tag-card">
+        <div class="tag-card-body">
+          <div class="tag-name">
+            <div class="tag-icon">
+              <i class="fa fa-tag"></i>
             </div>
-            <div class="tag-description">
-              <?php echo $row['description'] ?>
-            </div>
+            <?php echo $row['name'] ?>
+          </div>
+          <div class="tag-description">
+            <?php echo $row['description'] ?>
           </div>
         </div>
       </div>
-      <?php endwhile; ?>
     </div>
+    <?php endwhile; ?>
   </div>
 </div>
 
