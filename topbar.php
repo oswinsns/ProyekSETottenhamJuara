@@ -18,6 +18,11 @@
     min-height: 60px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background: linear-gradient(90deg, var(--primary), #5a85e6) !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
   }
   
   .navbar-container {
@@ -28,9 +33,44 @@
     padding: 0.5rem 1.5rem;
   }
   
+  /* Hamburger Menu Button */
+  .hamburger-menu {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+    display: none;
+  }
+  
+  .hamburger-menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+  
+  .hamburger-menu:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Hamburger Animation */
+  .hamburger-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .hamburger-menu.active .hamburger-icon {
+    transform: rotate(90deg);
+  }
+  
   .navbar-brand-section {
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
   }
   
   .navbar-brand-text {
@@ -39,6 +79,7 @@
     color: var(--white);
     margin-left: 0.5rem;
     letter-spacing: 0.5px;
+    transition: all 0.3s ease;
   }
   
   .logo {
@@ -102,6 +143,7 @@
   .user-section {
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
   }
   
   .user-dropdown {
@@ -171,8 +213,46 @@
     text-align: center;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
+  /* Responsive Design */
+  
+  /* Large Desktop (1200px+) */
+  @media (min-width: 1200px) {
+    .hamburger-menu {
+      display: none;
+    }
+    
+    .navbar-brand-text {
+      font-size: 1.25rem;
+    }
+    
+    .search-section {
+      max-width: 500px;
+      margin: 0 2rem;
+    }
+  }
+  
+  /* Desktop/Tablet (992px - 1199px) */
+  @media (max-width: 1199px) and (min-width: 993px) {
+    .hamburger-menu {
+      display: none;
+    }
+    
+    .navbar-brand-text {
+      font-size: 1.1rem;
+    }
+    
+    .search-section {
+      max-width: 350px;
+      margin: 0 1.5rem;
+    }
+  }
+  
+  /* Tablet (769px - 992px) */
+  @media (max-width: 992px) and (min-width: 769px) {
+    .hamburger-menu {
+      display: block;
+    }
+    
     .navbar-brand-text {
       font-size: 1rem;
     }
@@ -181,31 +261,137 @@
       max-width: 300px;
       margin: 0 1rem;
     }
+    
+    .user-name {
+      display: none;
+    }
   }
   
-  @media (max-width: 768px) {
+  /* Mobile Large (481px - 768px) */
+  @media (max-width: 768px) and (min-width: 481px) {
+    .hamburger-menu {
+      display: block;
+      margin-right: 0.5rem;
+    }
+    
     .navbar-container {
-      flex-wrap: wrap;
       padding: 0.5rem 1rem;
     }
     
-    .navbar-brand-section {
-      flex: 0 0 auto;
+    .navbar-brand-text {
+      font-size: 0.9rem;
+    }
+    
+    .logo {
+      width: 35px;
+      height: 35px;
+      margin-right: 0.5rem;
     }
     
     .search-section {
-      flex: 1 0 100%;
-      max-width: 100%;
-      margin: 0.5rem 0;
-      order: 3;
+      flex: 1;
+      max-width: none;
+      margin: 0 0.5rem;
     }
     
-    .user-section {
-      flex: 0 0 auto;
+    .search-input {
+      padding: 0.5rem 0.8rem 0.5rem 2rem;
+      font-size: 0.9rem;
+    }
+    
+    .search-icon {
+      left: 0.8rem;
+      font-size: 0.9rem;
     }
     
     .user-name {
       display: none;
+    }
+    
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      margin-right: 0;
+    }
+  }
+  
+  /* Mobile Small (max-width: 480px) */
+  @media (max-width: 480px) {
+    .hamburger-menu {
+      display: block;
+      margin-right: 0.25rem;
+      padding: 6px 10px;
+      font-size: 1.2rem;
+    }
+    
+    .navbar-container {
+      padding: 0.4rem 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .navbar-brand-section {
+      order: 1;
+    }
+    
+    .user-section {
+      order: 2;
+    }
+    
+    .search-section {
+      order: 3;
+      flex: 1 0 100%;
+      margin: 0.5rem 0 0 0;
+      max-width: 100%;
+    }
+    
+    .navbar-brand-text {
+      font-size: 0.85rem;
+    }
+    
+    .logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.4rem;
+    }
+    
+    .search-input {
+      padding: 0.45rem 0.75rem 0.45rem 1.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .search-icon {
+      left: 0.7rem;
+      font-size: 0.85rem;
+    }
+    
+    .user-name {
+      display: none;
+    }
+    
+    .user-avatar {
+      width: 26px;
+      height: 26px;
+      margin-right: 0;
+      font-size: 0.9rem;
+    }
+    
+    .user-dropdown-toggle {
+      padding: 0.4rem 0.6rem;
+    }
+  }
+  
+  /* Extra Small Mobile (max-width: 360px) */
+  @media (max-width: 360px) {
+    .navbar-brand-text {
+      display: none;
+    }
+    
+    .hamburger-menu {
+      margin-right: 0.5rem;
+    }
+    
+    .logo {
+      margin-right: 0;
     }
   }
 </style>
@@ -213,10 +399,15 @@
 <nav class="navbar navbar-light fixed-top navbar-modern">
   <div class="navbar-container">
     <div class="navbar-brand-section">
+      <!-- Hamburger Menu Button -->
+      <button class="hamburger-menu" id="sidebarToggle" type="button">
+        <i class="fa fa-bars hamburger-icon"></i>
+      </button>
+      
       <div class="logo">
         <i class="fa fa-comments"></i>
       </div>
-      <div class="navbar-brand-text">Oswin Hotspurs Forum</div>
+      <div class="navbar-brand-text">Oswin Hotsputs Forum</div>
     </div>
     
     <div class="search-section">
@@ -249,16 +440,27 @@
 </nav>
 
 <script>
+$(document).ready(function() {
+  // Account management
   $('#manage_my_account').click(function(){
     uni_modal("Manage Account","manage_user.php?id=<?php echo $_SESSION['login_id'] ?>&mtype=own")
-  })
+  });
+  
+  // Search functionality
   $('#find').keypress(function(e){
     if(e.which == 13){
       $('#manage-search').submit()
     }
-  })
+  });
+  
   $('#manage-search').submit(function(e){
     e.preventDefault()
     location.href = "index.php?page=search&keyword="+$('#find').val()
-  })
+  });
+  
+  // Hamburger menu animation
+  $('#sidebarToggle').click(function() {
+    $(this).toggleClass('active');
+  });
+});
 </script>
